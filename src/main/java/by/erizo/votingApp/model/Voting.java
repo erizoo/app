@@ -4,7 +4,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -21,7 +23,7 @@ public class Voting {
     private String theme;
 
     @OneToMany(cascade=CascadeType.ALL)
-    private Set<Vote> options = new HashSet<>();
+    private List<Vote> options = new ArrayList<>();
 
     @Column(name = "STATUS")
     @NotNull
@@ -30,7 +32,7 @@ public class Voting {
     public Voting() {
     }
 
-    public Voting(String theme, Boolean status, Set<Vote> options) {
+    public Voting(String theme, Boolean status, List<Vote> options) {
         this.theme = theme;
         this.options = options;
         this.status = status;
@@ -52,11 +54,11 @@ public class Voting {
         this.theme = theme;
     }
 
-    public Set<Vote> getOptions() {
+    public List<Vote> getOptions() {
         return options;
     }
 
-    public void setOptions(Set<Vote> options) {
+    public void setOptions(List<Vote> options) {
         this.options = options;
     }
 

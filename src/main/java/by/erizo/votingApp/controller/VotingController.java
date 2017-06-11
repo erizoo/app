@@ -51,7 +51,7 @@ public class VotingController {
         }
     }
 
-    @PostMapping("/{id}/vote")
+    @PutMapping("/{id}/vote")
     public ApiResponse<Voting> voteRegistration(@PathVariable Long id, @RequestBody Voting voting) {
         voting.setId(id);
         return new ApiResponse<>(votingService.saveVoting(voting), null);

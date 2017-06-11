@@ -1,6 +1,7 @@
 package by.erizo.votingApp;
 
 import by.erizo.votingApp.controller.VotingController;
+import by.erizo.votingApp.model.Vote;
 import by.erizo.votingApp.model.Voting;
 import by.erizo.votingApp.repository.VotingRepository;
 import by.erizo.votingApp.service.VotingService;
@@ -20,6 +21,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -32,6 +37,9 @@ public class VotingControllerTest {
     private static final String DEFAULT_URL = "/api/voting/";
 
     private static final String DEFAULT_THEME = "hello world";
+    private static final String DEFAULT_OPTION_NAME = "dog";
+    private static final Integer DEFAULT_OPTION_AMOUNT = 0;
+    private static final Integer CHANGED_OPTION_AMOUNT = 35;
     private static final Boolean DEFAULT_STATUS = false;
     private static final Boolean CHANGED_STATUS = true;
 
@@ -91,6 +99,21 @@ public class VotingControllerTest {
                 .andExpect(jsonPath("$.[*].id").isNotEmpty())
                 .andExpect(jsonPath("$.[*].theme").value(DEFAULT_THEME))
                 .andExpect(jsonPath("$.[*].status").value(CHANGED_STATUS));
+    }
+
+    @Test
+    public void voteRegistrationTest() throws Exception {
+        List<Vote> votes = new ArrayList<>();
+        votes.add(new Vote(DEFAULT_OPTION_NAME, DEFAULT_OPTION_AMOUNT));
+        Voting voting = votingService.createVoting(new Voting(DEFAULT_THEME, DEFAULT_STATUS, votes));
+
+        voting.getOptions().get(0).setAmount(CHANGED_OPTION_AMOUNT);
+        restVotingMockMvc.perform(put(DEFAULT_URL + voting.getId())
+                .contentType(APPLICATION_JSON_UTF8)
+                .content(json(voting)))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$.success.options[0].amount").value(CHANGED_OPTION_AMOUNT));
     }
 
     @SuppressWarnings("unchecked")

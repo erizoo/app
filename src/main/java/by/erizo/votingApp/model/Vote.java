@@ -17,11 +17,12 @@ public class Vote {
     @Column(name = "AMOUNT")
     private Integer amount;
 
-    @ManyToOne()
-    @JoinColumn(name = "VOTING_ID")
-    private Voting voting;
-
     public Vote() {
+    }
+
+    public Vote(String name, Integer amount) {
+        this.name = name;
+        this.amount = amount;
     }
 
     public Vote(Long id, String name, Integer amount) {
