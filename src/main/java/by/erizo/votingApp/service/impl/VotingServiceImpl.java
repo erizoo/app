@@ -1,7 +1,7 @@
 package by.erizo.votingApp.service.impl;
 
 import by.erizo.votingApp.repository.VotingRepository;
-import by.erizo.votingApp.model.Vote;
+import by.erizo.votingApp.model.Voting;
 import by.erizo.votingApp.service.VotingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,9 +9,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by Erizo on 10.06.2017.
- */
 @Service
 public class VotingServiceImpl implements VotingService {
 
@@ -19,27 +16,27 @@ public class VotingServiceImpl implements VotingService {
     private VotingRepository votingRepository;
 
     @Override
-    public Vote createVote(Vote vote) {
-        return votingRepository.saveAndFlush(vote);
+    public Voting createVoting(Voting voting) {
+        return votingRepository.saveAndFlush(voting);
     }
 
     @Override
-    public List<Vote> getVote() {
+    public List<Voting> getVotings() {
         return votingRepository.findAll();
     }
 
     @Override
-    public Vote updateVote(Vote vote) {
-        return votingRepository.saveAndFlush(vote);
+    public Voting updateVoting(Voting voting) {
+        return votingRepository.saveAndFlush(voting);
     }
 
     @Override
-    public Optional<Vote> getInfo(Long id) {
+    public Optional<Voting> getVotingInfo(Long id) {
         return votingRepository.findById(id);
     }
 
     @Override
-    public Vote saveVote(Vote vote) {
-        return votingRepository.saveAndFlush(vote);
+    public Voting saveVoting(Voting voting) {
+        return votingRepository.saveAndFlush(voting);
     }
 }

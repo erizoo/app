@@ -1,6 +1,6 @@
 package by.erizo.votingApp.service;
 
-import by.erizo.votingApp.model.Vote;
+import by.erizo.votingApp.model.Voting;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,13 +12,13 @@ import java.util.Optional;
 public interface VotingService {
 
 
-    Vote createVote(Vote vote);
+    Voting createVoting(Voting voting);
 
-    List<Vote> getVote();
+    List<Voting> getVotings();
 
-    Vote updateVote(Vote vote);
+    Voting updateVoting(Voting voting);
 
-    Optional<Vote> getInfo(Long id);
+    Optional<Voting> getVotingInfo(Long id);
 
-    Vote saveVote(Vote vote);
+    Voting saveVoting(Voting voting);
 }

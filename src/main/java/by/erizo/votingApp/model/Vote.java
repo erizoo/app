@@ -1,7 +1,6 @@
 package by.erizo.votingApp.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "vote")
@@ -12,23 +11,24 @@ public class Vote {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "THEME")
-    private String theme;
+    @Column(name = "NAME")
+    private String name;
 
-//    @Column(name = "OPTIONS")
-//    @OneToMany(mappedBy = "vote")
-//    private List<String> options;
-
-    @Column(name = "STATUS")
-    private Boolean status;
+    @Column(name = "AMOUNT")
+    private Integer amount;
 
     public Vote() {
     }
 
-    public Vote(Long id, String theme, Boolean status) {
+    public Vote(String name, Integer amount) {
+        this.name = name;
+        this.amount = amount;
+    }
+
+    public Vote(Long id, String name, Integer amount) {
         this.id = id;
-        this.theme = theme;
-        this.status = status;
+        this.name = name;
+        this.amount = amount;
     }
 
     public Long getId() {
@@ -39,23 +39,28 @@ public class Vote {
         this.id = id;
     }
 
-    public String getTheme() {
-        return theme;
+    public String getName() {
+        return name;
     }
 
-    public void setTheme(String theme) {
-        this.theme = theme;
+    public void setName(String name) {
+        this.name = name;
     }
 
-
-
-    public Boolean getStatus() {
-        return status;
+    public Integer getAmount() {
+        return amount;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setAmount(Integer amount) {
+        this.amount = amount;
     }
 
-
+    @Override
+    public String toString() {
+        return "Vote{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", amount=" + amount +
+                '}';
+    }
 }
